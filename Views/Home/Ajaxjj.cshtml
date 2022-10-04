@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Ajaxjj";
+}
+@section Style{
+    <style>
+        img {
+            display: none;
+        }
+    </style>
+}
+    <h1>Ajaxjj</h1>
+    <button class="btn btn-primary" id="Start">Start</button>
+    <button class="btn btn-primary" id="Stop">Stop</button>
+    <div id="divmessage"></div>
+    <img src="~/imgs/bing.gif" id="gif" />
+    <script>
+        let start = document.getElementById("Start")
+        let stop = document.getElementById("Stop")
+        let gif = document.getElementById("gif");
+        const xhr = new XMLHttpRequest
+        document.getElementById("divmessage").textContent = "請按start按鈕以欣賞"
+        stop.addEventListener("click", () => {
+            xhr.abort()
+        })
+
+
+        start.addEventListener("click", () => {
+            document.getElementById("divmessage").textContent = "請欣賞"
+            xhr.addEventListener("load", () => {
+                const data = xhr.responseText
+            })
+            xhr.addEventListener("loadstart", () => {
+                console.log("start")
+                start.textContent = "Now Loading"
+                start.setAttribute("disabled", "disabled")
+                gif.style.display = "inline"
+            })
+            xhr.addEventListener("loadend", () => {
+                console.log("end")
+                start.textContent = "start"
+                gif.style.display = "none"
+                start.removeAttribute("disabled")
+            })
+            xhr.addEventListener("abort", () => {
+                document.getElementById("divmessage").textContent = "你就這麼討厭白冰冰?"
+            })
+            xhr.open("GET", "/API/wait")
+            xhr.send()
+        })
+    </script>
+

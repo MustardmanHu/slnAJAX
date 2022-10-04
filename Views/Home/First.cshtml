@@ -40,22 +40,22 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
-    const A = document.createDocumentFragment();//空物件做暫存器
+    const DocFrag = document.createDocumentFragment();//空物件做暫存器
     for (var item of DATAS) {
         var Table_ele = document.createElement("table")
         const { Name, Add, Tel, TYWebsite } = item
         var newitem = [Name, Add, Tel, TYWebsite]
         var theadTXT = ["名稱", "地址", "電話", "網址"]
 
-        var tr_for_th = document.createElement("tr")
+        var tr_for_ths = document.createElement("tr")
         for (var Key of theadTXT) {
             console.log(Key)
             var th = document.createElement("th")
             var thtxt = document.createTextNode(Key)
             th.appendChild(thtxt)
-            tr_for_th.appendChild(th)
+            tr_for_ths.appendChild(th)
         }
-        Table_ele.appendChild(tr_for_th)
+        Table_ele.appendChild(tr_for_ths)
 
         var tr_for_tds = document.createElement("tr")
         for (var prop of newitem) {
@@ -65,7 +65,7 @@
             tr_for_tds.appendChild(td)
         }
         Table_ele.appendChild(tr_for_tds)
-        A.appendChild(Table_ele)
-        document.querySelector("#div1").appendChild(A)
+        DocFrag.appendChild(Table_ele)
+        document.querySelector("#div1").appendChild(DocFrag)
     }
 </script>

@@ -7,6 +7,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\imgs\bing.gif" />
+    <None Include="wwwroot\imgs\guodong.gif" />
+    <None Include="wwwroot\imgs\left.png" />
+    <None Include="wwwroot\imgs\OIP.gif" />
+    <None Include="wwwroot\imgs\Pause.png" />
+    <None Include="wwwroot\imgs\pic.jpg" />
+    <None Include="wwwroot\imgs\Pic2.jpg" />
+    <None Include="wwwroot\imgs\Pic3.jpg" />
+    <None Include="wwwroot\imgs\R.gif" />
+    <None Include="wwwroot\imgs\right.png" />
+    <None Include="wwwroot\imgs\Source\bird-dance.gif" />
+    <None Include="wwwroot\imgs\Source\logo.png" />
+    <None Include="wwwroot\imgs\Source\OIP.gif" />
+    <None Include="wwwroot\imgs\Source\Pic1.jpg" />
+    <None Include="wwwroot\imgs\Source\Pic2.jpg" />
+    <None Include="wwwroot\imgs\Source\Pic3.jpg" />
+    <None Include="wwwroot\imgs\Source\R.gif" />
+    <None Include="wwwroot\imgs\Source\tenor %281%29.gif" />
+    <None Include="wwwroot\imgs\Source\tenor.gif" />
+    <None Include="wwwroot\imgs\Source\下載.jpg" />
+    <None Include="wwwroot\imgs\start.png" />
+    <None Include="wwwroot\imgs\tenor.gif" />
+    <None Include="wwwroot\imgs\怕.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.9" />
   </ItemGroup>
 
