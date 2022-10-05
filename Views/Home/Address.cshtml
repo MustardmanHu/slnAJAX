@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Address";
+}
+
+<h1>Address</h1>
+<select id="select1">
+</select>
+<select id="select2">
+</select>
+<select id="select3">
+</select>
+@section Scripts{
+    <script>
+        const selcity = document.getElementById("select1");
+        const selcsite = document.getElementById("select2");
+        const selcity3 = document.getElementById("select3");
+      
+        
+
+        xh.addEventListener("load", () => {
+            let data = JSON.parse(xh.responseText);
+            for (var a of data) {
+                let options = new Option(a, a);
+                selcity.options.add(options);
+            }
+        })
+        xh.open("GET", "@Url.Action("City","API")");
+        xh.send();
+
+
+        xh2.addEventListener("load", () => {
+            let data = JSON.parse(xh2.responseText);
+            
+            for (var a of data) {
+                let options = new Option(a, a);
+                selcity.options.add(options);
+            }
+        })
+        xh2.open("GET", "@Url.Action("Site","API")"+`city?=${selcity.value}``);
+        xh2.send();
+
+    </script>
+
+
+}
