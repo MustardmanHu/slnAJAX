@@ -34,36 +34,44 @@ namespace slnAJAX.Controllers
 
             //todo 將收到會員資料寫進資料庫中
             //_host.ContentRootPath會得到專案資料夾(在本地是C:/......../slnAJAX
-            string filePath = Path.Combine(_host.WebRootPath/*應用程式執行所在伺服器的webroot目錄*/, "uploads"/*根目錄下的資料夾*/, File1.FileName/*檔案名稱*/);
-            //將檔案存到資料夾中
-            using (var fileStream = new FileStream(filePath, FileMode.Create))//使用using結束後自動關閉串流
+            var Q=from i in _context.Members where i.Name==member.Name select i;
+            if (File1 != null|| Q.Any())
             {
-                File1.CopyTo(fileStream);
-            }
-            #region
-            //將檔案轉成二進位
-            byte[] imgByte = null;
-            using (var memoryStream = new MemoryStream())
-            {
-                File1.CopyTo(memoryStream);
-                imgByte = memoryStream.ToArray();
-            }
-            member.FileData = imgByte;
-            #endregion
-            member.FileName = File1.FileName;
+                string filePath = Path.Combine(_host.WebRootPath/*應用程式執行所在伺服器的webroot目錄*/, "uploads"/*根目錄下的資料夾*/, File1.FileName/*檔案名稱*/);
 
-            Member NewMember = new()
+                //將檔案存到資料夾中
+                using (var fileStream = new FileStream(filePath, FileMode.Create))//使用using結束後自動關閉串流
+                {
+                    File1.CopyTo(fileStream);
+                }
+                #region
+                //將檔案轉成二進位
+                byte[] imgByte = null;
+                using (var memoryStream = new MemoryStream())
+                {
+                    File1.CopyTo(memoryStream);
+                    imgByte = memoryStream.ToArray();
+                }
+                member.FileData = imgByte;
+                #endregion
+                member.FileName = File1.FileName;
+                Member NewMember = new()
+                {
+                    Name = member.Name,
+                    FileName = member.FileName,
+                    Email = member.Email,
+                    Age = member.Age,
+                    FileData = member.FileData,
+                };
+                //todo 將收到會員資料寫進資料庫中
+                _context.Members.Add(NewMember);
+                _context.SaveChanges();
+                return Content("已經寫入資料庫", "text/plain", System.Text.Encoding.UTF8);
+            }
+            else
             {
-                Name = member.Name,
-                FileName = member.FileName,
-                Email = member.Email,
-                Age = member.Age,
-                FileData = member.FileData,
-            };
-            //todo 將收到會員資料寫進資料庫中
-            _context.Members.Add(NewMember);
-            _context.SaveChanges();
-            return Content("已經寫入資料庫", "text/plain");
+                return Content("圖片為必要", "text/plain", System.Text.Encoding.UTF8);
+            }
         }
         public IActionResult Check(string? name)
         {

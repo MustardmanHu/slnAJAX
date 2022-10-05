@@ -54,5 +54,9 @@ namespace slnAJAX.Controllers
             }
             return Content("帳號已存在", "text/plain", System.Text.Encoding.UTF8);
         }
+        public IActionResult First()
+        {
+            return View();
+        }
     }
 }

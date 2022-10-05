@@ -29,6 +29,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=HomeWork}/{action=RegionList}/{id?}");
+    pattern: "{controller=HomeWork}/{action=Index}/{id?}");
 
 app.Run();

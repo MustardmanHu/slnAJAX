@@ -9,7 +9,7 @@ namespace slnAJAX.Models
         public string? Name { get; set; }
         public string? Email { get; set; }
         public int? Age { get; set; }
-        public string? FileName { get; set; }
+        public string FileName { get; set; } = null!;
         public byte[]? FileData { get; set; }
     }
 }
