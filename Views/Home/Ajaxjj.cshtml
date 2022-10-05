@@ -44,7 +44,8 @@
             xhr.addEventListener("abort", () => {
                 document.getElementById("divmessage").textContent = "你就這麼討厭白冰冰?"
             })
-            xhr.open("GET", "/API/wait")
+
+            xhr.open("GET", @Url.Action("wait","API"))
             xhr.send()
         })
     </script>

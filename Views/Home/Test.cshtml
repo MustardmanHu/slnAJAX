@@ -1,32 +1,36 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Test";
 }
 
 <h1>Test</h1>
 <div>
-<input type="text" id="txt1" /><button id="btn1">click</button>
+    <input type="text" id="txt1" /><button id="btn1">click</button>
 </div>
 <div class="alert alert-primary" id="div1"></div>
 @section Scripts{
     <script>
 
-        let txtv=""
-        let btn=document.getElementById("btn1")
-        let txt = document.getElementById("txt1")
-        
-        btn.addEventListener("click",()=>{
-        txtv=txt.value
-        })
-        
-        const xhr=new XMLHttpRequest()
-        xhr.open("GET",`/Home/Test?txt=${txtv}`)
-        xhr.timeout=3000
-        xhr.send()
+        let txtv = "";
+        let btn = document.getElementById("btn1");
+        let txt = document.getElementById("txt1");
+        const xhr = new XMLHttpRequest();
 
-        xhr.addEventListener("load",()=>{
-            let data=xhr.responseText
-            document.getElementById("div1").textContent=data
+        btn.addEventListener("click", () => {
+            txtv = txt.value;
+            let url=@Url.Action("Hello","API");
+            let paras = `?txt=${txtv}`;
+            xhr.open("GET", uel+paras);
+            xhr.send
         })
+        xhr.addEventListener("load", () => {
+            let data = xhr.responseText;
+            document.getElementById("div1").textContent = data;
+        })
+
+
+
+
+
+
     </script>
 }

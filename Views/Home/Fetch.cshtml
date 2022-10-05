@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Fetch";
+}
+
+<h1>Fetch</h1>
+<img />
+<select id="city">
+
+</select>
+<select id="site">
+</select>
+<select id="road">
+</select>
+@section Scripts{
+    <script>
+        let h1 = document.querySelector("h1");
+        let img = document.querySelector("img");
+        let selcity = document.getElementById("city");
+        let selsite=document.getElementById("site");
+        let selroad = document.getElementById("road");
+        fetch("@Url.Content("~/API/wait")")//會得到promise物件
+            .then(resp => resp.text())//取得promise物件的text內容並回傳給下一個then
+            .then(resp => h1.textContent = resp)//將text內容塞進h1標籤
+
+        fetch("@Url.Content("~/API/City")")
+            .then(resp => resp.json())
+            .then(resp => {
+                for (var a of resp) 
+                {
+                    let options = new Option(a, a);
+                    selcity.options.add(options);
+                }
+            });
+
+        fetch("@Url.Content("~/API/Site")" +`?city=${selcity.value}`)
+            .then(resp => resp.json())
+            .then(resp => {
+                for (var a of resp) {
+                    let options = new Option(a, a);
+                    selsite.options.add(options);
+                }
+            });
+    </script>
+
+
+
+
+
+
+}

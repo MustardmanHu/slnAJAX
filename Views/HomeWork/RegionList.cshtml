@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "RegionList";
+}
+
+<h1>地區選單</h1>
+<select id="select1">
+</select>
+<select id="select2">
+</select>
+<select id="select3">
+</select>
+@section Scripts{
+    <script>
+        const selcity = document.querySelector("#select1");
+        const selcsite = document.querySelector("#select2");
+        const selcityroad = document.querySelector("#select3");
+
+        async function cities() {
+            let cities = await fetch("@Url.Content("~/HomeWork/City")")
+            let city = await cities.json();
+            for (var a of city) {
+                let options = new Option(a, a);
+                selcity.options.add(options);
+            }
+        }
+        cities();
+
+        selcity.addEventListener("change", async function Sites(){
+            selcsite.options.length = 0;
+            let sites = await fetch("@Url.Content("~/HomeWork/Site")" + `?city=${selcity.options[selcity.selectedIndex].value}`)
+            console.log(sites);
+            let site = await sites.json();
+            console.log(site);
+            
+            for (var a of site) {
+                let options = new Option(a, a);
+                selcsite.options.add(options);
+            }
+        });
+
+        selcsite.addEventListener("change", async function Roads() {
+            selcityroad.options.length = 0;
+            let roads = await fetch("@Url.Content("~/HomeWork/Road")" + `?siteid=${selcsite.options[selcsite.selectedIndex].value}`)
+            console.log(roads);
+            let road= await roads.json();
+            console.log(road);
+
+            for (var a of road) {
+                let options = new Option(a, a);
+                selcityroad.options.add(options);
+            }
+        });
+       
+        
+
+    </script>
+
+
+}
